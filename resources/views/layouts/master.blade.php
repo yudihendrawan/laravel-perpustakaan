@@ -8,7 +8,7 @@
     <meta name="author" content="Creative Tim">
     <title>Perpustakaan</title>
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('template') }}/img/brand/favicon.png" type="image/png">
+    <link rel="icon" href="{{ asset('template') }}/img/brand/logo.png" type="image/png">
 
     <link rel="stylesheet" href="{{ asset('template') }}/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('template') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css"
@@ -22,6 +22,7 @@
 
     {{-- material dsign --}}
     <link rel="stylesheet" href="{{ asset('materialdesignicons.min.css') }}">
+    <script src="https://kit.fontawesome.com/9068109a15.js" crossorigin="anonymous"></script>
     {{-- <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}"> --}}
    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -38,7 +39,7 @@
                 <!-- Brand -->
                 <div class="sidenav-header  align-items-center">
                     <a class="navbar-brand" href="javascript:void(0)">
-                        <img src="{{ asset('template') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
+                        <img src="{{ asset('template') }}/img/brand/logo_teks.png" class="navbar-brand-img " alt="...">
                     </a>
                 </div>
                 <div class="navbar-inner">
@@ -81,14 +82,14 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('transaksi') ? 'active' : '' }}"
                                 href="{{ route('transaksi.index') }}">
-                                <i class="ni ni-ruler-pencil text-red"></i>
+                                <i class="fa-solid fa-handshake text-red mr-3"></i>
                                 <span class="nav-link-text">Transaksi</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('riwayat') ? 'active' : '' }}"
                                 href="{{ route('riwayat.index') }}">
-                                <i class="ni ni-support-16 text-purple"></i>
+                                <i class="fa-solid fa-file-lines text-purple mr-4"></i>
                                 <span class="nav-link-text">Riwayat</span>
                             </a>
                         </li>

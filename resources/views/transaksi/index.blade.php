@@ -3,14 +3,14 @@
 @section('content')
     <div class="row">
         <div class="col-md-6 mt-4 mb-2">
-            <a href="{{ route('transaksi.create') }}" class="btn btn-secondary ">Tambah Transaksi</a>
+            <a href="{{ route('transaksi.create') }}" class="btn btn-secondary ">Tambah Peminjaman</a>
         </div>
         <div class="col-md-6 mt-4 mb-3 d-flex justify-content-end">
             <!-- Search form -->
             <form action="{{ route('transaksi.search') }}" method="get"
                 class="navbar-search navbar-search-light form-inline mr-sm-3 " id="navbar-search-main">
 
-                <input type="text" placeholder="masukkan kode transaksi"
+                <input type="text" placeholder="masukkan kode peminjaman"
                     class="form-control bg-white @error('q') is-invalid @enderror" name="q" autocomplete="off"
                     autofocus>
                 <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
@@ -35,7 +35,7 @@
                             <tr>
                                 <th scope="col" class="sort" data-sort="Nama">Nama</th>
                                 <th scope="col" class="sort" data-sort="Nim">Nim</th>
-                                <th scope="col" class="sort" data-sort="Kode Transaksi">Kode Transaksi</th>
+                                <th scope="col" class="sort" data-sort="Kode Transaksi">Kode Peminjaman</th>
                                 <th scope="col" class="sort" data-sort="Tanggal Pinjam">Tanggal Pinjam</th>
                                 <th scope="col" class="sort" data-sort="Tanggal Kembali">Tanggal Kembali</th>
                                 <th scope="col" class="sort" data-sort="Status">Status</th>
@@ -70,12 +70,12 @@
                                         @if ($item->status == 'pinjam')
                                             <span class="badge badge-dot mr-4">
                                                 <i class="bg-danger"></i>
-                                                <span>{{ $item->status }}</span>
+                                                <span style="text-transform: capitalize">{{ $item->status }}</span>
                                             </span>
                                         @else
                                             <span class="badge badge-dot mr-4">
                                                 <i class="bg-success"></i>
-                                                <span>{{ $item->status }}</span>
+                                                <span style="text-transform: capitalize">{{ $item->status }}</span>
                                             </span>
                                         @endif
 
@@ -94,7 +94,7 @@
                                                 @if ($item->status == 'pinjam')
                                                     <button class="dropdown-item btn-edit" data-toggle="modal"
                                                         data-target="#editTransaksi"
-                                                        data-id="{{ $item->id }}">Edit</button>
+                                                        data-id="{{ $item->id }}">Update</button>
                                                 @endif
 
                                                 @if ($item->status == 'kembali')
@@ -160,7 +160,7 @@
         <div class="modal-dialog">
             <div class="modal-content  mt-5">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Transaksi</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update Peminjaman</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -177,7 +177,7 @@
         <div class="modal-dialog">
             <div class="modal-content  mt-5">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detail Transaksi</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -192,11 +192,12 @@
 
 @push('script')
     <script>
+          const APP_URL = '{{ env('APP_URL') }}'
         // modal edit transaksi 
         $('.btn-edit').click(function() {
             let id = $(this).data('id');
             $.ajax({
-                url: `http://localhost:8000/transaksi/${id}/edit`,
+                url: `${APP_URL}/transaksi/${id}/edit`,
                 method: 'GET',
                 success: function(data) {
                     $('#editTransaksi').find('.modal-body').html(data);
@@ -208,7 +209,7 @@
         $('.btn-detail').click(function() {
             let id = $(this).data('id');
             $.ajax({
-                url: `http://localhost:8000/transaksi/${id}`,
+                url: `${APP_URL}/transaksi/${id}`,
                 method: 'GET',
                 success: function(data) {
                     $('#detailTransaksi').find('.modal-body').html(data);

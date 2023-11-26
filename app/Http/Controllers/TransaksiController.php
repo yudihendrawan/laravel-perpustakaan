@@ -20,7 +20,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $title = 'Daftar Transaksi';
+        $title = 'Daftar Peminjaman';
         $transaksi = Transaksi::with('anggota','buku','user')->orderBy('created_at','desc')->paginate(6);
         return view('transaksi.index',compact('title','transaksi'));
     }
@@ -48,27 +48,33 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        $message = ['required' => 'atribute tidak boleh kosong' ];
+        $message = ['required' => 'atribut tidak boleh kosong'];
         $request->validate([
             'tgl_pinjam' => 'required',
             'tgl_kembali' => 'required',
-        ],$message);
+        ], $message);
 
-        //ambil anggota id
-        $anggota = Anggota::where('nim',$request->nim)->get();
+        // Ambil anggota id
+        $anggota = Anggota::where('nim', $request->nim)->get();
         foreach ($anggota as $val) {
             $anggota_id = $val->id;
         }
-        //tolak jika anggota sudah pinjam 
-        if (Transaksi::where('anggota_id',$anggota_id)->exists() == true && Transaksi::where('status','pinjam')->exists() == true) {
-            session()->flash('fail','sorry, masih ada buku yang anda pinjam');
 
+        // Tolak jika anggota sudah meminjam buku
+        if (Transaksi::where('anggota_id', $anggota_id)->where('status', 'pinjam')->exists()) {
+            session()->flash('fail', 'Maaf, Anda masih memiliki buku yang belum dikembalikan.');
             return redirect('transaksi');
-            exit;
         }
 
-        $transaksi = Transaksi::create([
+        // Cek ketersediaan stok buku sebelum membuat transaksi
+        $buku = Buku::find($request->buku_id);
+        if (!$buku || $buku->jumlah_buku < 1) {
+            session()->flash('fail', 'Maaf, stok buku tidak tersedia.');
+            return redirect('transaksi');
+        }
 
+        // Membuat transaksi jika kondisi di atas terpenuhi
+        $transaksi = Transaksi::create([
             'anggota_id' => $anggota_id,
             'kode_transaksi' => Str::random(10),
             'buku_id' => $request->buku_id,
@@ -79,10 +85,12 @@ class TransaksiController extends Controller
             'user_id' => Auth::user()->id
         ]);
 
-        //jika transaksi dilakukan maka stock buku akan berkurang 
-        $transaksi->buku->where('id',$transaksi->buku_id)->update(['jumlah_buku' => $transaksi->buku->jumlah_buku -1]);
-        return redirect('transaksi')->with('success','transaksi anda berhasil!');
+        // Mengurangkan jumlah_buku pada buku terkait
+        $transaksi->buku->update(['jumlah_buku' => $buku->jumlah_buku - 1]);
+
+        return redirect('transaksi')->with('success', 'Transaksi Anda berhasil!');
     }
+    
 
     /**
      * Display the specified resource.

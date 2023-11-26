@@ -58,13 +58,13 @@
                                                 </td>
                                                 <td>
                                                     @if ($item->jenis_kelamin == 'pria')
-                                                        <span class="badge badge-dot mr-4">
-                                                            <i class="bg-primary"></i>
+                                                    <span class="badge badge-dot mr-4">
+                                                            <i class="fa-solid fa-mars"></i>
                                                             <span class="status">{{ $item->jenis_kelamin }}</span>
                                                         </span>
                                                     @else
                                                         <span class="badge badge-dot mr-4">
-                                                            <i class="bg-danger"></i>
+                                                            <i class="fa-solid fa-venus"></i>
                                                             <span class="status">{{ $item->jenis_kelamin }}</span>
                                                         </span>
                                                     @endif

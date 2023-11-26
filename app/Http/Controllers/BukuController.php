@@ -49,14 +49,14 @@ class BukuController extends Controller
             'tahun_terbit' => 'required',
             'jumlah_buku' => 'required',
             'lokasi' => 'required',
-            // 'gambar' => 'required|image|mimes:jpg,jpeg,png,svg'
+            'gambar' => 'required|image|mimes:jpg,jpeg,png,svg'
         
         ],[
             'required' => 'atribute tidak boleh kosong',
             'unique' => 'atribute sudah terdaftar',
             'max' => 'karakter max 25',
             'image' => 'atribute harus gambar',
-            // 'mimes' => 'atribute harus format jpg,jpeg,png atau svg'
+            'mimes' => 'atribute harus format jpg,jpeg,png atau svg'
         ]);
 
         //request file gambar jika ada tambahkan dan jika kosong

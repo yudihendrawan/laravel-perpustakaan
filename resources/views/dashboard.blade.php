@@ -53,8 +53,7 @@
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                <i class="ni ni-ruler-pencil"></i>
-                                
+                              <i class="fa-solid fa-handshake"></i>
                             </div>
                         </div>
                     </div>
@@ -74,7 +73,7 @@
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-gradient-purple text-white rounded-circle shadow">
-                                <i class="ni ni-support-16"></i>
+                              <i class="fa-solid fa-file-lines"></i>
                             </div>
                         </div>
                     </div>

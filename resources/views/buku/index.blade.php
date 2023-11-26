@@ -30,6 +30,7 @@
                                 <th scope="col" class="sort" data-sort="Penulis">Penulis</th>
                                 <th scope="col" class="sort" data-sort="Penerbit">Penerbit</th>
                                 <th scope="col" class="sort" data-sort="Tahun Terbit">Tahun Terbit</th>
+                                <th scope="col" class="sort" data-sort="Stok">Stok</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -49,12 +50,14 @@
                                     </td>
                                     <td>
                                         <span class="badge badge-dot mr-4">
-                                            <i class="bg-warning"></i>
                                             <span class="status">{{ $item->penerbit }}</span>
                                         </span>
                                     </td>
                                     <td>
                                         {{ $item->tahun_terbit }}
+                                    </td>
+                                    <td>
+                                        {{ $item->jumlah_buku }}
                                     </td>
 
                                     <td class="text-right">
@@ -260,7 +263,7 @@
 @push('script')
     <script>
 
-
+        const APP_URL = '{{ env('APP_URL') }}'
         //show gambar
         function readURL() {
             var input = this;
@@ -306,7 +309,7 @@
                 let id = $(this).data('id');
                 
                 $.ajax({
-                    url:`http://localhost:8000/buku/${id}`,
+                    url:`${APP_URL}/buku/${id}`,
                     method:'GET',
                     success:function(data){
                         $('#detailBuku').find('.modal-body').html(data);
@@ -320,7 +323,7 @@
                 let id = $(this).data('id');
                 
                 $.ajax({
-                    url:`http://localhost:8000/buku/${id}/edit`,
+                    url:`${APP_URL}/buku/${id}/edit`,
                     method:'GET',
                     success:function(data){
                         $('#editBuku').find('.modal-body').html(data);
