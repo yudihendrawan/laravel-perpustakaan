@@ -76,6 +76,13 @@
                                 <span class="nav-link-text">Anggota</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('petugas') ? 'active' : '' }}"
+                                href="{{ route('petugas.index') }}">
+                                <i class="ni ni-single-02 text-primary"></i>
+                                <span class="nav-link-text">Petugas</span>
+                            </a>
+                        </li>
                         @endif
                         @if (Auth::user()->level == 'admin' || Auth::user()->level == 'user')
                             
@@ -132,7 +139,7 @@
                                 </a>
                                 <div class="dropdown-menu  dropdown-menu-right ">
 
-                                    <a href="{{ route('petugas.index') }}" class="dropdown-item">
+                                    <a href="{{ route('profile.index') }}" class="dropdown-item">
                                         <i class="ni ni-settings-gear-65"></i>
                                         <span>Settings</span>
                                     </a>

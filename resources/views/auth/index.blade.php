@@ -5,7 +5,7 @@
         <div class="col-xl-8 order-xl-1 mt-4">
             <div class="card">
               <div class="card-header">
-                <form action="{{ route('petugas.update',$user->id) }}" method="post">
+                <form action="{{ route('profile.update',$user->id) }}" method="post">
                 <div class="row align-items-center">
                   <div class="col-8">
                     <h3 class="mb-0">Edit profile </h3>
@@ -13,7 +13,7 @@
                     <div class="flash" data-flash="{{ session()->get('success') }}"></div>
                   </div>
                   <div class="col-4 text-right">
-                    <button  class="btn btn-primary" type="submit" id="submit">Edit</button>
+                    <button  class="btn btn-primary" type="submit" id="submit">Save</button>
                   </div>
                 </div>
               </div>

@@ -25,20 +25,11 @@
 <div class="form-group">
     <label>Jenis Kelamin</label>
     <select name="jenis_kelamin" class="form-control">
-        <option selected disabled>-- Pilih Jenis Kelamin -- </option>
+        <option selected disabled style="text-transform: capitalize" >{{ $anggota->jenis_kelamin }}</option>
         <option value="{{ $anggota->jenis_kelamin == 'pria' ? 'selected' : '' }}"> Pria</option>
         <option value="{{ $anggota->jenis_kelamin == 'wanita' ? 'selected' : ''}}"> Wanita</option>
     </select>
 
-</div>
-<div class="form-group">
-    <label>Petugas</label>
-    <select name="user_id"  class="form-control">
-        <option selected disabled>-- Pilih Petugas -- </option>
-        @foreach ($users as $item)
-        <option value="{{ $item->id }}">{{ $item->level }}</option>
-        @endforeach
-    </select>
 </div>
 <div class="float-right">
     <button type="submit" class="btn btn-primary">Update</button>

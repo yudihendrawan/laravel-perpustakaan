@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/buku-search','BukuController@search')->name('buku.search')->middleware('privilege:admin');
     Route::resource('/anggota','AnggotaController')->middleware('privilege:admin');
     Route::get('/anggota-search','AnggotaController@search')->name('anggota.search')->middleware('privilege:admin');
+    Route::resource('/petugas', 'PetugasController')->middleware('privilege:admin');
+    Route::get('/petugas-search', 'PetugasController@search')->name('petugas.search')->middleware('privilege:admin');
     Route::resource('/transaksi','TransaksiController')->middleware('privilege:admin&user');
     Route::get('/transaksi-search','TransaksiController@search')->name('transaksi.search')->middleware('privilege:admin&user');
     Route::resource('/riwayat','HistoryController')->middleware('privilege:admin&user');
@@ -35,5 +37,5 @@ Route::middleware('auth')->group(function(){
     Route::get('/buku-excel','LaporanController@bukuExcel')->name('buku.excel')->middleware('privilege:admin&user');
     Route::get('/transaksi-pdf','LaporanController@transaksiPdf')->name('transaksi.pdf')->middleware('privilege:admin&user');
     Route::get('/transaksi-excel','LaporanController@transaksiExcel')->name('transaksi.excel')->middleware('privilege:admin&user');
-    Route::resource('/petugas','PetugasController');
+    Route::resource('/profile', 'ProfileController')->middleware('privilege:admin&user');;
 });
