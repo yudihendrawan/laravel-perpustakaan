@@ -26,6 +26,7 @@ class CreateTransaksisTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        
     }
 
     /**

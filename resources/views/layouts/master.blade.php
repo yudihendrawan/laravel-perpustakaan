@@ -128,12 +128,18 @@
                             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
                                     <div class="media align-items-center">
-                                        <span class="avatar avatar-sm rounded-circle">
-                                            <img alt="Image placeholder"
-                                            src="{{ asset('template') }}/img/theme/team-4.jpg">
-                                        </span>
-                                        <div class="media-body  ml-2  d-none d-lg-block">
-                                            <span class="mb-0 text-sm  font-weight-bold">{{ Auth::user()->name }}</span>
+                                        @if (Auth::user()->gambar)
+                                            <span class="avatar avatar-sm rounded-circle">
+                                                <img alt="Image placeholder" src="{{ asset('storage/' . Auth::user()->gambar) }}">
+                                            </span>
+                                        @else
+                                            <!-- Gambar default ketika gambar tidak tersedia -->
+                                            <span class="avatar avatar-sm rounded-circle">
+                                                <img alt="Default Image" src="{{ asset('template/img/avatar/default.jpeg') }}">
+                                            </span>
+                                        @endif
+                                        <div class="media-body ml-2 d-none d-lg-block">
+                                            <span class="mb-0 text-sm font-weight-bold">{{ Auth::user()->name }}</span>
                                         </div>
                                     </div>
                                 </a>
@@ -142,6 +148,10 @@
                                     <a href="{{ route('profile.index') }}" class="dropdown-item">
                                         <i class="ni ni-settings-gear-65"></i>
                                         <span>Settings</span>
+                                    </a>
+                                    <a href="{{ route('profile.updatePassword', ['id' => Auth::user()->id]) }}" class="dropdown-item">
+                                        <i class="ni ni-single-02"></i>
+                                        <span>Change password</span>
                                     </a>
                                     
                                     

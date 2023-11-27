@@ -17,27 +17,44 @@ class PetugasController extends Controller
    'petugas' => User::orderBy('name', 'asc')->paginate(4),
   ]);
  }
-
  public function store(Request $request)
  {
-  $request->validate([
-   'name' => 'required|max:255',
-   'email' => 'required|email:dns|unique:users',
-   'password' => 'required|min:5|max:255',
-   'level' => 'required',
+  $request->validate(['name' => 'required|max:255', 'email' => 'required|email:dns|unique:users', 'password' => 'required|min:5|max:255', 'level' => 'required', 'gambar' => 'required|image|mimes:jpg,jpeg,png,svg'
+  ], [
+   'required' => 'Atribut tidak boleh kosong',
+   'unique' => 'Atribut sudah terdaftar',
+   'max' => 'Karakter maksimal 255',
+   'image' => 'Atribut harus berupa gambar',
+   'mimes' => 'Atribut harus berformat jpg, jpeg, png, atau svg'
   ]);
 
-  $validatedData = $request->all();
-  $validatedData['password'] = Hash::make($validatedData['password']);
+  // Request file gambar, jika ada, tambahkan; jika tidak, kosongkan
+  if ($request->hasFile('gambar')) {
+   $file = $request->file('gambar');
+   $fileName = $file->store('img/petugas');
+  }
 
-  User::create($validatedData);
+  // $validatedData = $request->all();
+  // $validatedData['gambar'] = $fileName;
+  // $validatedData['password'] = Hash::make($validatedData['password']);
+
+  // User::create($validatedData);
+  //insert to database buku
+  User::create([
+   'name' => $request->name,
+   'email' => $request->email ?? '',
+   'password' => Hash::make($request->password),
+   'level' => $request->level,
+   'gambar' => $fileName ?? ''
+  ]);
 
   return redirect('petugas')->with('success', 'Petugas berhasil ditambahkan');
  }
 
+
  public function show($id)
  {
-  $petugas = User::with('petugas')->find($id);
+  $petugas = User::find($id);
   return view('petugas.show', compact('petugas'));
  }
 

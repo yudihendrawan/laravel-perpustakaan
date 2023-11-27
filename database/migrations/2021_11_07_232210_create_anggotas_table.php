@@ -21,6 +21,7 @@ class CreateAnggotasTable extends Migration
             $table->string('jurusan')->nullable();
             $table->enum('jenis_kelamin',['pria','wanita']);
             $table->foreignId('user_id')->constrained('users');
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }

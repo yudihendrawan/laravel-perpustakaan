@@ -19,12 +19,12 @@
      <input type="password" name="password"  class="form-control" value="{{ $petugas->password }}">
  </div>
  <div class="form-group">
-     <label>Level</label>
-     <select name="level" class="form-control">
-         <option selected disabled>-- Pilih Jenis Level -- </option>
-         <option value="{{ $petugas->level == 'admin' ? 'selected' : '' }}"> Admin</option>
-         <option value="{{ $petugas->level == 'user' ? 'selected' : ''}}"> User</option>
-     </select>
+    <label>Level</label>
+    <select name="level" class="form-control">
+        <option selected disabled>-- Pilih Jenis Level -- </option>
+        <option value="admin" {{ $petugas->level == 'admin' ? 'selected' : '' }}> Admin</option>
+        <option value="user" {{ $petugas->level == 'user' ? 'selected' : '' }}> User</option>
+    </select>
  
  </div>
 

@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-md-6 mt-4 mb-2">
                         <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#tambahPetugas"> Tambah
-                            Petuagas</a>
+                            Petugas</a>
                     </div>
                     <div class="col-md-6 mt-4 mb-3 d-flex justify-content-end">
                         <!-- Search form -->
@@ -37,7 +37,6 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col" class="sort" data-sort="Judul">Nama</th>
-                                            <th scope="col" class="sort" data-sort="Username">Username</th>
                                             <th scope="col" class="sort" data-sort="Email">Email</th>
                                             <th scope="col" class="sort" data-sort="Level">Level</th>
                                             <th scope="col"></th>
@@ -49,13 +48,17 @@
                                                 <th scope="row">
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
-                                                            <span class="name mb-0 text-sm">{{ $item->name }}</span>
+                                                            @if ($item->gambar)
+                                                                <img class="avatar rounded-circle" src="{{ asset('storage/'.$item->gambar) }}" alt="{{ $item->name }}" />
+                                                            @else
+                                                                <!-- Avatar default jika tidak ada gambar -->
+                                                                <img class="avatar rounded-circle" src="{{ asset('template/img/avatar/default.jpeg') }}" alt="Default Avatar" />
+                                                            @endif
+                                                            <span class="name mb-0 text-sm ml-2">{{ $item->name }}</span>
                                                         </div>
+                                                        
                                                     </div>
                                                 </th>
-                                                <td class="budget">
-                                                    {{ $item->username }}
-                                                </td>
                                                 <td class="budget">
                                                     {{ $item->email }}
                                                 </td>
@@ -150,7 +153,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('petugas.store') }}" method="post">
+                    <form action="{{ route('petugas.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="">Nama</label>
@@ -191,6 +194,14 @@
                                     <option value="user"> User</option>
                             </select>
                             @error('level')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Gambar</label>
+                            <img id="preview" src="" alt="Preview" width="150" height="150">
+                            <input type="file" name="gambar" id="gambar" class="uploads form-control mt-2" value="{{ old('gambar') }}" onchange="previewImage()">
+                            @error('gambar')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -310,5 +321,16 @@
 
 
         })
+        function previewImage() {
+        var input = document.getElementById('gambar');
+        var preview = document.getElementById('preview');
+
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
     </script>
 @endpush

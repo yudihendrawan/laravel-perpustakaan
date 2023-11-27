@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,4 +38,6 @@ Route::middleware('auth')->group(function(){
     Route::get('/transaksi-pdf','LaporanController@transaksiPdf')->name('transaksi.pdf')->middleware('privilege:admin&user');
     Route::get('/transaksi-excel','LaporanController@transaksiExcel')->name('transaksi.excel')->middleware('privilege:admin&user');
     Route::resource('/profile', 'ProfileController')->middleware('privilege:admin&user');;
+    Route::get('/profile/{id}/update-password', [ProfileController::class, 'showUpdatePasswordForm'])->name('profile.showUpdatePasswordForm');
+    Route::put('/profile/{id}/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 });

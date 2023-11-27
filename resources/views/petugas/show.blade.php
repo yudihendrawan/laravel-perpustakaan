@@ -7,11 +7,15 @@
 </style>
 <div class="card mb-3">
  <div class="row g-0">
-     <div class="col-md-4">
-         @if ($petugas->gambar)
-             <img width="150" height="150" @if($petugas->gambar) src="{{ asset('Storage/'.$petugas->gambar) }}" @endif />
-         @endif
-     </div>
+    <div class="col-md-4">
+        @if ($petugas->gambar)
+            <img width="150" height="150" class="rounded-circle" src="{{ asset('storage/'.$petugas->gambar) }}" alt="{{ $petugas->name }}" />
+        @else
+            <!-- Gambar default jika tidak ada gambar -->
+            <img width="150" height="150" class="rounded-circle" src="{{ asset('template/img/avatar/default.jpeg') }}" alt="Default Image" />
+        @endif
+    </div>
+    
      <div class="col-md-8">
          <div class="card-body">
              <div class="card-text">
