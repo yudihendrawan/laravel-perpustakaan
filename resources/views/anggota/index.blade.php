@@ -16,6 +16,13 @@
 
                             <input type="text" placeholder="masukkan pencarian" class="form-control bg-white"
                                 name="q" id="q">
+                                @if(request()->has('q'))
+                                <div class="input-group-append">
+                                    <a href="{{ route('anggota.index') }}" class="btn btn-danger" type="button">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                        @endif
                             <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
 
                         </form>

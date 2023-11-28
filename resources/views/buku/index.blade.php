@@ -5,14 +5,24 @@
             <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#tambahBuku"> Tambah Buku</a>
         </div>
         <div class="col-md-6 mt-4 mb-3 d-flex justify-content-end">
-              <!-- Search form -->
-              <form  action="{{ route('buku.search') }}" method="get" class="navbar-search navbar-search-light form-inline mr-sm-3 " id="navbar-search-main">
-
-                <input type="text" placeholder="masukkan pencarian" class="form-control bg-white @error('q') is-invalid @enderror" name="q" autocomplete="off" autofocus>
-               <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-    
+            <!-- Search form -->
+            <form action="{{ route('buku.search') }}" method="get" class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+        
+                <div class="input-group">
+                    <input type="text" placeholder="masukkan pencarian" class="form-control bg-white @error('q') is-invalid @enderror" name="q" value="{{ request('q') }}" autocomplete="off" autofocus>
+                    @if(request()->has('q'))
+                    <div class="input-group-append">
+                        <a href="{{ route('buku.index') }}" class="btn btn-danger" type="button">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                            @endif
+                </div>
+        
+                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
             </form>
         </div>
+        
         <div class="col-md-12">
             <div class="card">
                 <!-- Card header -->

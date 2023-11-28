@@ -13,6 +13,13 @@
                 <input type="text" placeholder="masukkan kode peminjaman"
                     class="form-control bg-white @error('q') is-invalid @enderror" name="q" autocomplete="off"
                     autofocus>
+                    @if(request()->has('q'))
+                    <div class="input-group-append">
+                        <a href="{{ route('transaksi.index') }}" class="btn btn-danger" type="button">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                            @endif
                 <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
 
             </form>

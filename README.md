@@ -14,3 +14,48 @@ this application is build with:</br>
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # laravel-perpustakaan
+
+## Installation
+
+Cara Install
+
+- Download zip project laravel-perpustakaan
+atau
+- git clone project ini dengan perintah di terminal
+
+```bash
+  git clone https://github.com/yudihendrawan/laravel-perpustakaan.git
+```
+- buka project di text editor
+- buka terminal, lalu jalankan
+
+```bash
+composer install
+```
+atau 
+```bash
+composer update
+```
+
+- rename .env.example menjadi .env
+- atur configurasi database
+- gunakan APP_URL=http://127.0.0.1:8000. jika localhost nya menggunakan 27.0.0.1:8000
+- dan gunakan APP_URL=http://localhost:8000. jika localhost nya menggunakan localhost:8000
+
+ ```bash
+php artisan migrate
+```
+```bash
+php artisan migrate --seed
+```
+```bash
+php artisan key:generate
+```
+
+```bash
+php artisan storage:link
+```
+
+ ```bash
+php artisan serve
+```

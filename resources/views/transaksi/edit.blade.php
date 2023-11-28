@@ -34,10 +34,11 @@
                 <div class="form-group">
                     <label for="">Status</label>
                     <select name="status" class="form-control">
-                        <option disabled selected style="text-transform: capitalize">{{ $transaksi->status }}</option>
-                        {{-- <option value="pinjam">Pinjam</option> --}}
-                        <option value="kembali">Kembali</option>
+                        <option selected disabled>-- Pilih Jenis Level -- </option>
+                        <option value="pinjam" {{ $transaksi->status == 'pinjam' ? 'selected' : '' }}> Pinjam</option>
+                        <option value="kembali" {{ $transaksi->status == 'kembali' ? 'selected' : '' }}> Kembali</option>
                     </select>
+                 
                 </div>
                 @if ($transaksi->ket)
                     <div class="form-group">

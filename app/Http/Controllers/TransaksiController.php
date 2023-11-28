@@ -48,8 +48,12 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        $message = ['required' => 'atribut tidak boleh kosong'];
-        $request->validate([
+        $message = [
+            'required' => 'atribute tidak boleh kosong',
+            'unique' => 'atribute sudah ada',
+            'numeric' => 'atribute harus angka',
+        ];
+        $request->validate(['nim' => 'required | numeric',
             'tgl_pinjam' => 'required',
             'tgl_kembali' => 'required',
         ], $message);
@@ -127,10 +131,12 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $message = ['required' => 'atribute tidak boleh kosong' ];
         $request->validate([
-            'tgl_pinjam' => 'required',
-            'tgl_kembali' => 'required',
+            // 'tgl_pinjam' => 'required',
+            // 'tgl_kembali' => 'required',
+            'status' => 'required',
         ],$message);
 
         //ambil anggota id
@@ -145,11 +151,12 @@ class TransaksiController extends Controller
             'kode_transaksi' => Str::random(10),
             'buku_id' => $request->buku_id ?? $transaksi->buku_id,
             'tgl_pinjam' => $request->tgl_pinjam ?? $transaksi->tgl_pinjam,
-            'tgl_kembali' => $request->tgl_kembali ?? $transaksi->rgl_kembali,
+            'tgl_kembali' => $request->tgl_kembali ?? $transaksi->tgl_kembali,
             'status' => $request->status ?? $transaksi->status,
             'ket' => $request->ket ?? $transaksi->ket,
             'user_id' => Auth::user()->id
         ]);
+
 
           //jika transaksi dilakukan maka stock buku akan berkurang 
           $transaksi->buku->where('id',$transaksi->buku_id)->update(['jumlah_buku' => $transaksi->buku->jumlah_buku +1]);

@@ -164,7 +164,14 @@ class BukuController extends Controller
             'required' => 'atribute tidak boleh kosong'
         ]);
         $cari = $request->q;
-        $buku = Buku::where('judul','LIKE',"%$cari%")->orWhere('penulis','LIKE',"%$cari%")->paginate();
+        $buku = Buku::when($cari, function ($query) use ($cari) {
+            return $query->where('judul', 'LIKE', "%$cari%")
+                ->orWhere('penulis', 'LIKE', "%$cari%")
+                ->orWhere('isbn', 'LIKE', "%$cari%")
+                ->orWhere('penerbit', 'LIKE', "%$cari%")
+                ->orWhere('jumlah_buku', 'LIKE', "%$cari%");
+        })
+        ->paginate();;
 
         return view('buku.index',[
             'title' => 'Daftar Buku',

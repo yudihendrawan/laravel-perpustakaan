@@ -135,7 +135,11 @@ class AnggotaController extends Controller
     public function search(Request $request){
 
         $cari = $request->get('q');
-        $anggota = Anggota::where('nim','LIKE',"%$cari%")->orWhere('nama','LIKE',"%$cari%")->paginate();
+        $anggota = Anggota::where('nim', 'LIKE', "%$cari%")
+        ->orWhere('nama', 'LIKE', "%$cari%")
+        ->orWhere('jurusan', 'LIKE', "%$cari%")
+        ->orWhere('jenis_kelamin', 'LIKE', "%$cari%")
+        ->paginate();
         return view('anggota.index',[
             'title' => 'Daftar Anggota',
             'anggota' =>  $anggota,
