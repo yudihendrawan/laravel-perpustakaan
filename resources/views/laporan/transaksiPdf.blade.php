@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-    <title>Laporan Buku</title>
+    <title>Laporan Transaksi</title>
     <style>
         .text-center{
             text-align: center;
@@ -30,7 +30,7 @@
     </style>
 </head>
 <body>
-    <h4 class="text-center">Laporan Buku</h4>
+    <h4 class="text-center">Laporan Transaksi</h4>
     <div class="text-right mb">
         
         <span>Tanggal : {{ date('d-M-Y') }}</span>/
