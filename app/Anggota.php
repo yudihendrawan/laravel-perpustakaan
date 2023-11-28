@@ -17,6 +17,6 @@ class Anggota extends Model
 
     public function transaksi(){
 
-        return $this->hasMany(Transaksi::class);
+        return $this->hasMany(Transaksi::class,);
     }
 }

@@ -58,11 +58,17 @@ class TransaksiController extends Controller
             'tgl_kembali' => 'required',
         ], $message);
 
-        // Ambil anggota id
-        $anggota = Anggota::where('nim', $request->nim)->get();
-        foreach ($anggota as $val) {
-            $anggota_id = $val->id;
+        // Ambil anggota berdasarkan NIM
+        $anggota = Anggota::where('nim', $request->nim)->first();
+
+        // Tangani kasus ketika anggota tidak ditemukan
+        if (!$anggota) {
+            session()->flash('fail', 'Anggota dengan NIM ' . $request->nim . ' tidak ditemukan.');
+            return redirect('transaksi');
         }
+
+        // Ambil ID anggota
+        $anggota_id = $anggota->id;
 
         // Tolak jika anggota sudah meminjam buku
         if (Transaksi::where('anggota_id', $anggota_id)->where('status', 'pinjam')->exists()) {

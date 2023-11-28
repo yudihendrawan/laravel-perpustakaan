@@ -6,7 +6,9 @@ use App\Anggota;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
+use App\Transaksi; 
 class AnggotaController extends Controller
 {
     /**
@@ -42,6 +44,7 @@ class AnggotaController extends Controller
     public function store(Request $request)
     {
         //validasi
+      
         $message = [
             'required' => 'atribute tidak boleh kosong',
             'unique' => 'atribute sudah ada',
@@ -55,7 +58,6 @@ class AnggotaController extends Controller
             'tgl_lahir' => 'required',
             'jurusan' => 'required',
             'jenis_kelamin' => 'required',
-            'user_id' => 'required',
             'created_at' => Carbon::now()
         ],$message);
 
@@ -68,8 +70,9 @@ class AnggotaController extends Controller
             'tgl_lahir' => $request->tgl_lahir,
             'jurusan' => $request->jurusan,
             'jenis_kelamin' => $request->jenis_kelamin,
-            'user_id' => $request->user_id
+            'user_id' => Auth::user()->id
         ]);
+        dd('Setelah menyimpan ke database');
         return redirect('anggota')->with('success','anggota berhasil ditambahkan');
     }
 
@@ -128,8 +131,13 @@ class AnggotaController extends Controller
      */
     public function destroy($id)
     {
+        // Hapus semua transaksi terkait dengan anggota
+        Transaksi::where('anggota_id', $id)->delete();
+
+        // Hapus anggota
         Anggota::find($id)->delete();
-        return redirect('anggota')->with('success','anggota berhasil dihapus');
+
+        return redirect('anggota')->with('success', 'Anggota berhasil dihapus.');
     }
 
     public function search(Request $request){

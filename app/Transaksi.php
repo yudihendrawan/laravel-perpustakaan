@@ -15,7 +15,7 @@ class Transaksi extends Model
 
     public function anggota(){
 
-        return $this->belongsTo(Anggota::class);
+        return $this->belongsTo(Anggota::class,);
     }
 
     public function buku(){
