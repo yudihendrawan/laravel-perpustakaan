@@ -17,7 +17,7 @@ class AnggotaSeeder extends Seeder
         Anggota::insert([
 
             [
-                'nama' => 'Rudi Hartanto',
+                'nama' => 'Okky',
                 'nim' => '0123456',
                 'no_hp' => '03947484',
                 'tgl_lahir' => '1994-08-01',
@@ -27,7 +27,7 @@ class AnggotaSeeder extends Seeder
                 'created_at' => Carbon::now()
             ],
             [
-                'nama' => 'Riska Miralda',
+                'nama' => 'Rio',
                 'nim' => '0234578',
                 'no_hp' => '081234567',
                 'tgl_lahir' => '1997-02-11',

@@ -43,9 +43,9 @@
                                 <table class="table align-items-center table-flush">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col" class="sort" data-sort="Judul">Nama</th>
                                             <th scope="col" class="sort" data-sort="Penulis">NIM</th>
-                                            <th scope="col" class="sort" data-sort="Penerbit">Jenis Kelamin</th>
+                                            <th scope="col" class="sort" data-sort="Judul">Nama</th>
+                                            <th scope="col" class="sort" data-sort="Penerbit">No Hp</th>
                                             <th scope="col" class="sort" data-sort="Tahun Terbit">Jurusan</th>
                                             <th scope="col"></th>
                                         </tr>
@@ -56,25 +56,15 @@
                                                 <th scope="row">
                                                     <div class="media align-items-center">
                                                         <div class="media-body">
-                                                            <span class="name mb-0 text-sm">{{ $item->nama }}</span>
+                                                            <span class="name mb-0 text-sm">{{ $item->nim }}</span>
                                                         </div>
                                                     </div>
                                                 </th>
                                                 <td class="budget">
-                                                    {{ $item->nim }}
+                                                    {{ $item->nama }}
                                                 </td>
                                                 <td>
-                                                    @if ($item->jenis_kelamin == 'pria')
-                                                    <span class="badge badge-dot mr-4">
-                                                            <i class="fa-solid fa-mars"></i>
-                                                            <span class="status">{{ $item->jenis_kelamin }}</span>
-                                                        </span>
-                                                    @else
-                                                        <span class="badge badge-dot mr-4">
-                                                            <i class="fa-solid fa-venus"></i>
-                                                            <span class="status">{{ $item->jenis_kelamin }}</span>
-                                                        </span>
-                                                    @endif
+                                                    {{ $item->no_hp }}
 
                                                 </td>
                                                 <td>
